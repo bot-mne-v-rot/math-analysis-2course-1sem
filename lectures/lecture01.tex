@@ -1,0 +1,191 @@
+\chapter{Теория меры}
+\section{Системы множеств}
+\underline{Небольшое введение в теорию меры:} на плоскости у нас есть понятие площади. На 
+различных множествах оно может быть задано по разному и может давать разные результаты. Мы хотим сузить класс множеств, на которых 
+зададим понятие меры, чтобы результаты были одинаковыми. Также мы хотим обобщить понятие интеграла. Сейчас класс интегрируемых функций у нас
+слишком мал. 
+
+Пусть есть множество $X$. Будем говорить про подмножества $X$. Возьмем некое семейство подмножеств $\A \subset 2^X$. Также введем обозначение:
+
+\begin{conj}
+  За $A \sqcup B$ обозначим \textbf{дизъюнктивное объединение}. Это объединение $A$ и $B$, при условии, что они не пересекаются. 
+  В данном случае $A$ и $B$ называются дизъюнктными подмножествами.
+\end{conj}
+
+\begin{conj}
+  Пусть есть множество $E = \bigsqcup\limits_{\alpha \in I} E_\alpha$. Тогда это самое $\bigsqcup\limits_{\alpha \in I} E_\alpha$ называется 
+  \textbf{разбиением} множества $E$
+\end{conj}
+
+\underline{Напоминание}: 
+\begin{gather*}
+  X \setminus \bigcup\limits_{\alpha \in I} A_\alpha = \bigcap\limits_{\alpha \in I} X \setminus A_\alpha \\
+  X \setminus \bigcap\limits_{\alpha \in I} A_\alpha = \bigcup\limits_{\alpha \in I} X \setminus A_\alpha
+\end{gather*}
+
+Свойства системы множеств $\A$:
+\begin{enumerate}
+  \item[$(\sigma_0)$:] $A, B \in \A \Longrightarrow A \cup B \in A$
+  \item[$(\delta_0)$:] $A, B \in \A \Longrightarrow A \cap B \in A$
+  \item[$(\sigma)$:] $A_1, A_2, A_3, \dots \in \A \Longrightarrow \bigcup\limits_{n=1}^{\infty} A_n \in \A$
+  \item[$(\delta)$:] $A_1, A_2, A_3, \dots \in \A \Longrightarrow \bigcap\limits_{n=1}^{\infty} A_n \in \A$
+\end{enumerate}
+
+\begin{conj}
+  $\A$ -- \textbf{симметричная} система, если:
+  \begin{gather*}
+    A \in \A \Longrightarrow X \setminus A \in \A 
+  \end{gather*}
+\end{conj}
+
+\textbf{Утверждение.} 
+
+Если $\A$ -- симметрична, то $(\sigma_0) \Longleftrightarrow (\delta_0)$ и $(\sigma) \Longleftrightarrow (\delta)$
+
+\begin{proof}
+  \begin{gather*}
+    X \setminus (A \cup B) = (X \setminus A) \cap (X \setminus B) \\
+    (A \cup B) \in \A \Longrightarrow (X \setminus A) \cap (X \setminus B) \in \A \\
+    (\sigma_0) \Longrightarrow (\delta_0)
+  \end{gather*}
+  Обратно аналогично, второе утверждение аналогично.
+\end{proof}
+
+\begin{conj}
+  $\A$ -- алгебра, если: $\varnothing \in \A$, $\A$ симметрична и выполняются свойства $(\sigma_0)$ и $(\delta_0)$.
+\end{conj}
+
+\begin{conj}
+  $\A$ -- $\sigma$-алгебра, если: $\varnothing \in \A$, $\A$ симметрична и выполняются свойства $(\sigma)$ и $(\delta)$.
+\end{conj}
+
+Свойства алгебры:
+\begin{enumerate}
+  \item $\varnothing, X \in \A$
+  \item $A, B \in \A \Longrightarrow A \setminus B \in \A$
+  \begin{proof}
+    $A \setminus B = A \cap (X \setminus B)$. $X \setminus B \in \A$ по симметричености, тогда $A \cap (X \setminus B) \in \A$ по $(\delta_0)$. А тогда $A \setminus B \in \A$
+  \end{proof}
+  \item Если $A_1, \dots, A_n \in \A$, то $\bigcup\limits_{k=1}^n A_k$ и $\bigcap\limits_{k=1}^n A_k \in \A$
+  \begin{proof}
+    Индукция по $n$
+  \end{proof}
+\end{enumerate}
+
+\textbf{Примеры}:
+\begin{enumerate}
+  \item $X = \R^n$ \\
+  $\A = \{$все ограниченные множества и их дополнения$\}$ -- алгебра, но не $\sigma$-алгебра.
+  \item $2^X$ -- $\sigma$-алгебра
+  \item $X \supset Y \qquad \A$ -- алгебра ($\sigma$-алгебра) подмножеств $X$ \\
+  $\B := \{ A \cap Y : A \in \A \}$ -- алгебра ($\sigma$-алгебра) подмножеств $Y$
+  \begin{proof}
+    Хотим проверить симметричность. Для некоторого $B \in \B$:
+    \begin{align*}
+      B &= A \cap Y & Y \setminus B &= Y \setminus A \\
+        &           &               &= Y \cap \subsetbelow{(X \setminus A)}{A} \\
+        &           &               &\Rightarrow Y \setminus B \in B
+    \end{align*}
+    Объединение тоже есть: $A_1, A_2 \in X \Longrightarrow A_1 \cap A_2 \in X$
+  \end{proof} 
+  $\B$ называется индуцированной алгеброй($\sigma$-алгеброй)
+  \item $\A_\alpha$ -- алгебры($\sigma$-алгебры) подмножеств в $X$. Тогда $\bigcap\limits_{\alpha \in I} \A_\alpha$ -- алгебра($\sigma$-алгебра) подмножеств в $X$.
+\end{enumerate}
+
+Встал вопрос. Если взять два множества из $X$, как будет выглядеть минимальная алгебра, которая содержет их оба? 
+
+\begin{theorem}
+  Пусть $\E$ -- система подмножеств $X$. Тогда существует наименьшая по включению $\sigma$-алгебра, содержащая $\E$. Под минимальной по включению 
+  имеется в виду, что эта алгебра не содержит других, но при этом все остальные содержат ее.
+\end{theorem}
+
+\begin{proof}
+  Пусть $\A_\alpha$ -- всевозможные $\sigma$-алгебры, которые содержат $\E$. $2^X$ -- алгебра и $2^X \supset \E$ -- то есть алгебры, указанные в теоремы 
+  как минимум существуют.
+
+  Теперь пересечем все такие $\sigma$-алгебры:
+  \begin{gather*}
+    \B := \bigcap\limits_{\alpha \in I} \A \text{ -- $\sigma$-алгебра}
+  \end{gather*}
+  Утверждается, что $\B$ -- искомая $\sigma$-алгебра. Пойдем от обратного. Пусть есть $\sigma$-алгебра $\mathcal{C} \supset \E$ и $\mathcal{C} \not\supset \B$.
+  Но такого не может быть, так как $\mathcal{C} \supset \E \Longrightarrow \mathcal{C} = \A_0 \Longrightarrow \mathcal{C} \supset \B$
+\end{proof}
+
+\begin{conj}
+  Наша $\sigma$-алгебра, которую мы получили и которая содержет $\E$ -- это \textbf{борелевская} оболочка $\E$. Обозначается как $\B(\E)$
+\end{conj}
+
+\begin{conj}
+  Борелевская оболочка системы всех открытых множеств -- \textbf{борелевская $\sigma$-алгебра}. Если $X = \R^n$, обозначается как $\B^n$
+\end{conj}
+
+\begin{notice}
+  \begin{gather*}
+    \underset{\text{континуум}}{\B^n} \neq \underset{\text{не континуум}}{2^{\R^n}}
+  \end{gather*}
+\end{notice}
+
+\begin{conj}
+  $\RR \supset 2^X$ -- кольцо, если:
+  \begin{itemize}
+    \item $\varnothing \in \RR$
+    \item Если $A, B \in \RR$, то $A \cap B \in \RR, A \setminus B \in \RR$ и $A \cap B \in \RR$ 
+  \end{itemize}
+\end{conj}
+
+\begin{conj}
+  $\PP \subset 2^X$ -- полукольцо, если:
+  \begin{itemize}
+    \item $\varnothing \in \PP$
+    \item $A, B \in \PP \Longrightarrow A \cap B \in \PP$
+    \item $A, B \in \PP \Longrightarrow \exists Q_1, Q_2, \dots, Q_n \in \PP$, такие, что:
+    \begin{gather*}
+      A \setminus B = \bigsqcup\limits_{k=1}^n Q_k
+    \end{gather*}
+  \end{itemize}
+\end{conj}
+
+Вопрос справедливый, зачем нам вообще такая кривая структура как полукольцо? Ладно еще просто кольцо, но это уже вообще абсурд. Разгадка в примере, 
+для примерного описания свойств которого специально слепили структуру. 
+
+\textbf{Пример}: в $\R$ рассмотрим различные полуинтервалы:
+\begin{gather*}
+  \PP = \{ [a, b) : a, b \in \R \} \text{ -- полукольцо} 
+\end{gather*} 
+Если пробовать делать то же самое в $\R^2$, то получим:
+\begin{gather*}
+  \PP = \{ [a, b) \times [c, d) : a, b, c, d \in \R \} \text{ -- полукольцо} 
+\end{gather*}
+
+\begin{lemma}
+  $A_n \subset X$. Тогда:
+  \begin{gather*}
+    \bigcup\limits_{k=1}^n A_k = \bigsqcup\limits_{k=1}^n A_k \setminus \bigcup\limits_{i=1}^{k-1} A_i \\
+    \text{и аналогично для счетного множества} \\
+    \bigcup\limits_{k=1}^\infty A_k = \bigsqcup\limits_{k=1}^\infty A_k \setminus \bigcup\limits_{i=1}^{k-1} A_i
+  \end{gather*}
+\end{lemma}
+
+\begin{proof}
+  \begin{gather*}
+    \text{Обозначим } B_k := A_k \setminus \bigcup_{i=1}^{k-1} A_i
+  \end{gather*}
+  $B_k \subset A_k$. Сначала докажем, что $B$-шки не пересекаются: пусть $j < k$. Надо проверить, что 
+  $B_j \cap B_k = \varnothing$. 
+  \begin{gather*}
+    \subsetbelow{B_j}{A_j} \qquad \cap \stackbelow{B_k}{A_k \setminus (A_1 \cup A_2 \cup \dots \cup \text{\circled{$A_j$}} \cup \dots \cup A_{k-1})}
+  \end{gather*} 
+  Так как из $B_k$ выкуинули $A_j$, а $B_j$ лежит в $A_j$, то из $B_k$ выкинуто и $B_j$, то есть $B_j \cap B_k = \varnothing$. 
+  
+  Теперь докажем, что объединения $A$-шек и $B$-шек равны. 
+  \begin{enumerate}
+    \item[``$\supset$'':] Так как $A_k \supset B_k$
+    \item[``$\subset$'':] Возьмем $x$ лежащий в левой части. Тогда $\exists k$, такое, что 
+    $x \in A_k$. Возьмем наименьший индекс $k_0$, такой, что $x \in A_{k_0}$, и при этом $x \notin A_i$ при $i < k_0$.
+    Тогда:
+    \begin{gather*}
+      x \in B_{k_0} = \underbrace{A_{k_0}}_{\text{тут есть } x} \setminus \underbrace{(A_1 \cup \dots \cup A_{k_0 - 1})}_{\text{тут нет } x}
+    \end{gather*}
+    То есть какой бы мы ни взяли элемент в левой части, он обязан будет лежать в правой.
+  \end{enumerate}
+\end{proof}
