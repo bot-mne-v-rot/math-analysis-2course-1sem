@@ -160,9 +160,9 @@
 \begin{lemma}
   $A_n \subset X$. Тогда:
   \begin{gather*}
-    \bigcup\limits_{k=1}^n A_k = \bigsqcup\limits_{k=1}^n A_k \setminus \bigcup\limits_{i=1}^{k-1} A_i \\
+    \bigcup\limits_{k=1}^n A_k = \bigsqcup\limits_{k=1}^n \left( A_k \setminus \bigcup\limits_{i=1}^{k-1} A_i \right) \\
     \text{и аналогично для счетного множества} \\
-    \bigcup\limits_{k=1}^\infty A_k = \bigsqcup\limits_{k=1}^\infty A_k \setminus \bigcup\limits_{i=1}^{k-1} A_i
+    \bigcup\limits_{k=1}^\infty A_k = \bigsqcup\limits_{k=1}^\infty \left( A_k \setminus \bigcup\limits_{i=1}^{k-1} A_i \right) 
   \end{gather*}
 \end{lemma}
 
@@ -189,3 +189,247 @@
     То есть какой бы мы ни взяли элемент в левой части, он обязан будет лежать в правой.
   \end{enumerate}
 \end{proof}
+
+\begin{theorem}
+  $\PP$ -- полукольцо. Тогда $P_1, P_2, \dots, P_n \in \PP$ и:
+  \begin{enumerate}
+    \item $P\setminus \bigcup\limits_{k=1}^n P_k = \bigsqcup\limits_{j=1}^m Q_j$ для некоторых $Q_1, \dots, Q_m \in \PP$
+    \item $\bigcup\limits_{k=1}^n P_k = \bigsqcup\limits_{k=1}^n \bigsqcup\limits_{j=1}^{m_k} Q_{k_j}$, где $Q_{k_j} \in \PP$ и $Q_{k_j} \subset P_k$
+    \item $\bigcup\limits_{k=1}^\infty P_k = \bigsqcup\limits_{k=1}^\infty \bigsqcup\limits_{j=1}^{m_k} Q_{k_j}$, где $Q_{k_j} \in \PP$ и $Q_{k_j} \subset P_k$
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof} \quad 
+
+  \begin{enumerate}
+    \item Будем доказывать по индукции. База: $n=1$ -- определение полукольца. Переход $n \longrightarrow n+1$:
+    \begin{gather*}
+      P \setminus \bigcup\limits_{k=1}^{n+1} P_k = \left( P \setminus \bigcup\limits_{k=1}^n P_k\right) \setminus P_{n+1} \xlongequal{\text{инд. предп.}} \left( \bigsqcup\limits_{j=1}^m Q_j \right) \setminus P_{n+1} = \stackbelow{\underbrace{\bigsqcup\limits_{j=1}^m Q_j \setminus P_{n+1}}}{\oast}
+    \end{gather*}
+    $\oast = \bigsqcup\limits_{i=1}^{m_j} R_{j_i}$ по определению полукольца. 
+    \item Доказывается сугубо применением леммы:
+    \begin{gather*}
+      \bigcup\limits_{k=1}^n P_k \xlongequal{\text{лемма}} \bigsqcup\limits_{k=1}^n \underset{\displaystyle\overset{\qquad\quad\;\;\displaystyle\parallel{\text{по п. 1}}}{\bigsqcup\limits_{i=1}^{m_k} Q_{k_i}}}{\underbrace{\left( P_k \setminus \bigcup\limits_{i=1}^{k-1} A_i \right)}} 
+      = \bigsqcup\limits_{k=1}^n \bigsqcup\limits_{i=1}^{m_k} Q_{k_i}
+    \end{gather*}
+    \item То же самое, что и пункт 2, только не до $n$, а до $\infty$
+  \end{enumerate}
+\end{proof}
+
+\begin{conj}
+  $\A \subset 2^X, \B \subset 2^Y$. Зададим \textbf{декартово произведение} семейств множеств:
+  \begin{gather*}
+    \A \times \B = \{ \subsetbelow{A \times B}{X \times Y} : A \in \A, B \in \B \} \subset 2^{X \times Y} 
+  \end{gather*} 
+\end{conj}
+
+\begin{theorem}
+  Декартово произведение полуколец -- полукольцо.
+\end{theorem}
+
+\begin{proof}
+  Пусть $\A$ и $\B$ -- полукольца. Будем проверять аксиомы полукольца у их декартова произведения:
+  \begin{enumerate}
+    \item $\varnothing \times \varnothing = \varnothing \in \A \times \B$ -- пустой есть
+    \item Возьмем $A \times B \in \A \times \B$ и $A' \times B' \in \A \times \B$
+    \begin{center}
+      \begin{tikzpicture}
+        \node[box1, fill=red, fill opacity=0.08] (c2) at (0,0) {};
+        \node[box2, fill=blue, fill opacity=0.08] (c1) at (1.5,1.5) {};
+        \draw[pattern={Lines[angle=-45,distance={3pt/sqrt(2)}]}, pattern color=blue] (0,0.5) rectangle (1.25,1.25);
+        \node[] (A) at (0,-1.6) {$A$};
+        \node[] (B) at (-1.6,0) {$B$};
+        \node[] (A1) at (1.6,0.2) {$A'$};
+        \node[] (B1) at (-0.3,1.6) {$B'$};
+      \end{tikzpicture}
+    \end{center}
+    Тогда:
+    \begin{gather*}
+      (A \times B) \cap (A' \times B') = \inbelow{(A \cap A')}{\A} \times \inbelow{(B \cap B')}{\B} \subset \A \times \B
+    \end{gather*}
+    Все четенько 
+    \item Осталось проверить последний пункт:
+    \begin{center}
+      \begin{tikzpicture}
+        \node[box1, fill=white, fill opacity=0.08] (c2) at (0,0) {};
+        \draw[pattern={Lines[angle=-45,distance={3pt/sqrt(2)}]}, pattern color=blue] (-1.25,-1.25) rectangle (1.25,1.25);
+        \node[box2, fill=white, fill opacity=1] (c1) at (1.5,1.5) {};
+        \node[box3, fill=white, fill opacity=0.08] (c2) at (0,0) {};
+        \node[] (A) at (0,-1.6) {$A$};
+        \node[] (B) at (-1.6,0) {$B$};
+        \node[] (A1) at (1.6,0.2) {$A'$};
+        \node[] (B1) at (-0.3,1.6) {$B'$};
+      \end{tikzpicture}
+    \end{center} 
+  \end{enumerate}
+  \begin{gather*}
+    (A \times B) \setminus (A' \times B') = A \times (B \setminus B') \sqcup (A \setminus A') \times (B \cap B')
+  \end{gather*}
+  Сверяемся с картинкой, понимаем, что звучит как правда. Теперь:
+  \begin{gather*}
+    \stackbelow{\underbrace{A \times \stackbelow{\underbrace{(B \setminus B')}}{\bigsqcup\limits_{j=1}^n Q_j}}}{\bigsqcup\limits_{j=1}^n A \times Q_i} \sqcup \stackbelow{\underbrace{\stackbelow{\underbrace{(A \setminus A')}}{\bigsqcup\limits_{i=1}^n P_i} \times (B \cap B')}}{\bigsqcup\limits_{i=1}^m \bigsqcup\limits_{j=1}^n P_i \times (B \cap B')}
+  \end{gather*} 
+  Ну и вуаля. Вышло что-то дикое, но мы представили наше выражение в виде квадратного объединения кучи частей, как мы и хотели. 
+\end{proof}
+
+\begin{conj}
+  Пусть $a, b \in \R^n$. Определим \textbf{замкнутый параллелипипед} следующим образом:
+  \begin{gather*}
+    [a, b] = [a_1, b_1] \times [a_2, b_2] \times \dots \times [a_n, b_n]
+  \end{gather*}
+  \textbf{Открытый параллелипипед} следующим образом:
+  \begin{gather*}
+    (a, b) = (a_1, b_1) \times (a_2, b_2) \times \dots \times (a_n, b_n)
+  \end{gather*}
+  А \textbf{ячейку} следующим образом:
+  \begin{gather*}
+    [a, b) = [a_1, b_1) \times [a_2, b_2) \times \dots \times [a_n, b_n)
+  \end{gather*}
+\end{conj}
+
+\begin{theorem}
+  Непустая ячейка -- это:
+  \begin{enumerate}
+    \item обьединение возрастающей последовательности замкнутых параллелипипедов 
+    \item пересечение убывающей последовательности открытых параллелипипедов
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof} \quad 
+  \begin{center}
+    \begin{tikzpicture}
+      \node[] (1) at (-1,1.5) {$1.$};
+      \node[box4, fill=red, fill opacity=0.1] (c1) at (1.5,1.5) {};
+      \node[box2, fill=white, fill opacity=1] (c1) at (1.43,1.43) {};
+
+      \node[] (2) at (5.5,1.5) {$2.$};
+      \node[box4, fill=blue, fill opacity=0.1] (c1) at (8,1.5) {};
+      \node[box2, fill=white, fill opacity=1] (c1) at (8.07,1.57) {};
+    \end{tikzpicture}
+  \end{center}
+  \begin{align*}
+    [a, b) &= \bigcup\limits_{m=1}^\infty [a, b^{(m)}] & b^{(m)} &= \left( b_1 - \frac{1}{m}, b_2 - \frac{1}{m}, \dots, b_n - \frac{1}{m} \right) \\
+    [a, b) &= \bigcap\limits_{m=1}^\infty [a^{(m)}, b] & a^{(m)} &= \left( a_1 - \frac{1}{m}, a_2 - \frac{1}{m}, \dots, a_n - \frac{1}{m} \right)
+  \end{align*}
+\end{proof}
+
+\underline{Обозначение}: $\PP^n$ -- \textbf{полукольцо ячеек} в $\R^n$. А $\PP^n_{\Q}$ -- \textbf{полукольцо ячеек} с рациональными координатами в $\R^n$. 
+
+\underline{Утверждение}: Это действительно полукольцо.
+
+\begin{proof}
+  Следует из предыдущей теоремы про декартово произведение.
+\end{proof}
+
+\begin{theorem}
+  Всякое непустое открытое множество $G \in \R^n$ -- это счетное дизъюнктивное 
+  объединение ячеек. Более того, можно считать, что $\Cl$ ячеек $\subset G$ и можно считать, что ячейки с рациональными координаты.
+\end{theorem}
+
+\begin{proof}
+  Возьмем $x \in G$. 
+
+  \begin{center}
+    \begin{tikzpicture}[square/.style={draw=black, thick, rectangle, minimum height=0.95cm, minimum width=0.95cm},
+      dashedsquare/.style={draw=black, dashed, rectangle, minimum height=0.8cm, minimum width=0.8cm}]
+      \draw[thick, -, rounded corners=2mm] (0,0) \irregularcircle{2cm}{2mm};
+      \draw[thick] (0,-1) circle(0.7);
+      \fill[thick, black] (0,-1) circle(0.07) node[below right]{x};
+      \node[square, fill=white, fill opacity=0] (c1) at (0,-1) {};
+      \node[dashedsquare, fill=white, fill opacity=0] (c1) at (0,-1) {};
+      \draw[white, thick, dashed] (-0.45, -0.525) -- (0.45, -0.525);
+      \draw[white, thick, dashed] (0.474, -0.57) -- (0.474, -1.46);
+    \end{tikzpicture}
+  \end{center}
+  Возьмем замкнутый шарик $\overline{B_r}(x) \subset G$. Впишем в шарик кубик и получим ячейку. немного отъедем внутрь и получим ячейку 
+  $P_x$ с рациональными координатами, если они вдруг вышли иррациональными. Теперь:
+  \begin{gather*}
+    x \in P_x \subset \overline{B_r}(x) \subset G \Longrightarrow x \in \Cl P_x \subset \overline{B_r}(x) \subset G
+  \end{gather*} 
+  Итак если мы возьмем объединение ячеек по всем $x$ из $G$, мы получим $G$, то есть $\bigcup\limits_{x \in G} P_x = G$. Проверим это:
+  \begin{itemize}
+    \item[``$\subset$'':] Очевидно, так как $P_x \in G$
+    \item[``$\supset$'':] Очевидно, так как $\forall x \in G$, $x$ пренадлежит некоторому $P_x$
+  \end{itemize}
+  Чтобы сделать объединение дизъюнктивным воспользуемся уже доказанной теоремой. 
+
+  Остается проблема только со счетностью. Ячейки параметризуются кортежами из рациональных координат. Различных таких
+  координат счетное количество. Выкинем из множества повторы и оно станет счетным.
+\end{proof}
+
+\follow 
+\begin{gather*}
+  \B (\PP^n) = \B (\PP_\Q^n) = \B^n
+\end{gather*}
+
+\begin{proof}
+  Последовательно докажем включения
+  \begin{enumerate}
+    \item $\B (\PP^n) \supset \B (\PP_\Q^n)$:
+    \begin{gather*}
+      \PP^n \supset \PP^n_\Q \Longrightarrow \B (\PP^n) \supset \B (\PP_\Q^n)
+    \end{gather*}
+    \item $\B (\PP_\Q^n) \supset \B^n$:
+    $\B(\PP_\Q^n)$ содержит все открытые множества (по теореме) $\Longrightarrow \B(\PP_\Q^n)$ содержит наименьшую $\sigma$-алгебру, натянутую на открытые множества, то есть содержит $\B^n$
+    \item $\B^n \supset \B (\PP^n)$: $\B^n \supset \PP^n$: ячейка -- пересечение открытых параллелограммов
+  \end{enumerate}
+  \mybox[orange!15]{Сам не понял, что я тут написал в пруфе третьего включения. В тетради неразборчиво. Если забуду поправить, поправьте кто-нибудь.}
+\end{proof}
+
+\section{Объем и мера}
+
+\begin{conj}
+  $\PP$ -- полукольцо подмножеств $X$. И задана:
+  \begin{gather*}
+    \mu : \PP \longrightarrow [0, +\infty]
+  \end{gather*}
+  Тогда $\mu$ -- \textbf{объем}, если:
+  \begin{enumerate}
+    \item $\mu \varnothing = 0$
+    \item Если $A_1, \dots, A_n \in \PP$ и $\bigsqcup\limits_{k=1}^n A_k \in \PP$, то:
+    \begin{gather*}
+      \mu \left( \bigsqcup\limits_{k=1}^n A_k \right) = \sum\limits_{k=1}^n \mu A_k
+    \end{gather*}
+  \end{enumerate}
+\end{conj}
+
+\begin{conj}
+  $\mu$ -- \textbf{мера}, если:
+  \begin{enumerate}
+    \item $\mu \varnothing = 0$
+    \item Если $A_1, A_2, \dots \in \PP$ и $\bigsqcup\limits_{k=1}^\infty A_k \in \PP$, то:
+    \begin{gather*}
+      \mu \left( \bigsqcup\limits_{k=1}^\infty A_k \right) = \sum\limits_{k=1}^\infty \mu A_k
+    \end{gather*}
+  \end{enumerate}
+\end{conj}
+
+\underline{Упражнение}: Доказать, что если $\mu \not\equiv +\infty$, то из $(2)$ следует $(1)$.
+
+\textbf{Примеры:}
+\begin{enumerate}
+  \item Длина на полуинтервале в $\R$
+  \item $g : \R \longrightarrow \R$ монотонно возрастает. При $a \leqslant b$:
+  \begin{gather*}
+    \nu_g [a, b) := g(b) - g(a) \qquad \text{ на полуинтевалах в } \R
+  \end{gather*}
+  \item \begin{align*}
+    \lambda_n &: \PP^n \longrightarrow [0, +\infty) \\
+    \lambda_n[a, b) &:= (b_1 - a_1)(b_2 - a_2) \dots (b_n - a_n) \\
+    \lambda_n \varnothing &:= 0 
+  \end{align*}
+  \item $x_0 \in X, a > 0$
+  \begin{gather*}
+    \mu A := \begin{cases}
+      0 \text{, если } x_0 \not \in A \\
+      a \text{, если } x_0 \in A
+    \end{cases}
+  \end{gather*}
+  Это объем
+  \item Все ограниченные множества в $\R^n$ и их дополнения:
+  \begin{gather*}
+    \mu (\text{огр. множества}) = 0 \\
+    \mu (\text{неогр. множества}) = 1
+  \end{gather*}
+  Это объем, но не мера
+\end{enumerate}
