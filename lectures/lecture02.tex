@@ -1,0 +1,307 @@
+\renewcommand{\P}{\PP}
+\begin{theorem}
+    (свойства объема). $\PP$ - полукольцо, $\mu$ - объем на $\PP$. Тогда
+    \begin{enumerate}
+        \item Монотнность. Если $P \subset Q \subset \PP$, то $\mu P \leq \mu Q$
+        \item Усиленная монотонность. Если $P, P_1, P_2, \cdots P_n \subset \PP$ и
+        $\bigsqcup \limits_{k = 1}^n P_k \subset P$, то $\sum \limits_{k = 1}^\infty \mu P_k \leq \mu P$
+        \item[2'.] Если $P, P_1, P_2, \cdots \subset \PP$ и
+        $\bigsqcup \limits_{k = 1}^\infty P_k \subset P$, то $\sum \limits_{k = 1}^\infty \mu P_k \leq \mu P$
+        \item Конечная полуаддитивность. Если $P, P_1, P_2, \cdots P_n \subset \PP$ и
+        $P \subset \bigcup \limits_{k = 1}^n P_k$, то $\mu P_k \leq \sum \limits_{k = 1}^n \mu P_k$
+
+        \textbf{Замечание:} счётного аналога может не быть. Пример из прошлой лекции про
+        ограниченные множества и их дополнения 
+        (объем ограниченных множества и их дополнений равен 0, остальных 1).
+        Тогда единичными квадратами можно заполнить нижнюю полуплоскость, объем которой 1, но их суммарный объем будет 0.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    $2 \to 1$~--- очевидно
+   
+   2. Была теорема: $P \setminus \bigsqcup \limits_{k = 1}^{n} P_k =  $
+   $\bigsqcup \limits_{j = 1}^{m} Q_j$, где $Q_j \in \PP \Rightarrow $
+   $P = \bigsqcup \limits_{k = 1}^{n} P_k \ \sqcup $
+    $\bigsqcup \limits_{j = 1}^{m} Q_j \Rightarrow$
+    $\mu P = \sum \limits_{k=1}^{n} \mu P_k + $
+    $\sum \limits_{j=1}^{m} \mu Q_j \ge  \sum \limits_{k=1}^{n} \mu P_k$
+   
+   
+   2'. $\bigsqcup \limits_{k = 1}^{\infty} P_k \subset P \Rightarrow$
+   $\bigsqcup \limits_{k = 1}^{n} P_k \subset P \Rightarrow$
+   $\sum \limits_{k=1}^{n} \mu P_k \le \mu P \ \forall \ n$ (по п. 2).
+   Перейдем к пределу.
+   
+   3. $P'_k := P \cap P_k \in \P$. 
+   Тогда $P = \bigcup \limits_{k = 1}^n P'_k =$
+   $\bigsqcup \limits_{k = 1}^{n} \bigsqcup \limits_{j = 1}^{m_k} Q_{kj}$, где
+   $Q_{kj} \subset P_k$. Тогда по свойству аддитивности
+   $\mu P = \sum \limits_{k=1}^{n} \sum \limits_{j=1}^{m_k} \mu Q_{kj}$.
+   $\bigsqcup \limits_{j = 1}^{m_k} Q_{kj} \subset P_k$, тогда по п. 2 
+   $\sum \limits_{j=1}^{m_k} \mu Q_{kj} \le \mu P_k$
+\end{proof}
+   
+   \begin{observation}
+   Если $\P$~--- кольцо, $B \subset A$ и $\mu B \neq + \infty$, тогда
+   $\mu (A \setminus B) = \mu A - \mu B$ 
+   ($A = (A \setminus B) \sqcup B$, при этом $A \setminus B \in \P$, 
+   т.к. $\P$~--- кольцо)
+   \end{observation}
+   
+   
+   \begin{theorem}
+    $\P$~--- полукольцо подмножеств $X$, $\mu$~--- объем на $\P$.
+    $\mathcal{Q}$~--- полукольцо подмножеств $Y$, $\nu$~--- объем на $\mathcal{Q}$.
+   
+    $\P \times \mathcal{Q} = \{P \times Q : P \in \P, Q \in \mathcal{Q}\} $
+   
+    $\lambda (P \times Q) := \mu P \cdot \nu Q$~--- объем на $\P \cdot \mathcal{Q}$
+   \end{theorem}
+   
+   \begin{proof}
+    Простой случай: если $P = \bigsqcup \limits_{k = 1}^{n} P_k$, 
+   $Q = \bigsqcup \limits_{j = 1}^{m} Q_j$, тогда 
+   $P \times Q = \bigsqcup \limits_{k = 1}^{n} \bigsqcup \limits_{j = 1}^{m} P_k \times Q_j$.  При этом 
+   $\sum \limits_{k=1}^{n}  \sum \limits_{j=1}^{m} \mu P_k \cdot \nu Q_j = $
+   $\sum \limits_{k=1}^{n} \mu P_k \sum \limits_{j=1}^{m} \nu Q_j = $
+   $\mu P \cdot \nu Q$. 
+   
+   Общий случай: $P \times Q = \bigsqcup P_k \times Q_k$.
+   
+   TODO: картинка: квадрат побили на прямоугольники неровным образом
+   
+   Надо измельчить все множества, порезав полностью по всем горизонталям и 
+   вертикалям. Любой участок по $P$-шкам~--- это разность каких-то $P$-шек.
+   Они не являются элементами полукольца, 
+   так что их надо еще сильнее измельчить.
+   Тогда получится простой случай, 
+   потому что каждый старый прямоугольник разложится в сумму по новым 
+   прямоугольникам. Каждый новый прямоугольник ровно один раз 
+   фигурирует в каком-то из старых.
+   \end{proof}
+   
+   \begin{observation}
+       
+   $0 \cdot +\infty = +\infty \cdot 0 = 0$
+   \end{observation}
+   
+   \begin{consequence}
+   $\lambda _m$~--- объем на $\P^m$.
+   \end{consequence}
+   
+   
+   
+   \begin{example} (меры):
+   
+   1. $\P = \R$. $\lambda _1 [a, b) := b - a$~--- мера (без доказательства)
+   
+   2. $g: \R \to \R$~--- неубывающая, непрерывная слева.
+   $\nu _g [a, b) = g(b) - g(a)$~--- мера (без доказательства)
+   
+   3. $x \in X$, $a > 0$. Тогда $\mu A = 
+   \begin{cases}
+       a\text{, если }x \in A,\\
+       0\text{ иначе}
+   \end{cases}$~--- мера
+   
+   4. $\#A$~--- мера (считающая мера)
+   
+   5. $T = \{t_1, t_2 \ldots\} \subset X$, где $T$~--- не более, чем счетное.
+   $\{\omega_1, \omega_2\ldots\} $~--- неотрицательные числа. 
+   $\mu A := \sum \limits_{i: t_i \in A} \omega_i$ - мера.
+   \end{example}
+   
+   \begin{proof}
+    Надо проверить: $P = \bigsqcup \limits_{n = 1}^{\infty} P_n \Rightarrow$
+   $\mu P = \sum \mu P_n$
+   
+   $\mu P_n = \sum \limits_{k} a_{nk}$. Тогда $\mu P = \sum \limits_{n, k} a_{nk}$
+   
+   Надо понять, что $\sum \limits_{n, k} a_{nk} = \sum \limits_{n=1}^{\infty} \sum \limits_{k=1}^{\infty} a_{nk}$
+   
+   $\sum \limits_{n=1}^{\infty} $
+   $\sum \limits_{k=1}^{\infty} a_{nk} = $
+   $\lim \limits_{N \to \infty} \sum \limits_{n=1}^{N} $
+   $\sum \limits_{k=1}^{\infty} a_{nk} = $
+   $\lim \limits_{N \to \infty} \sum \limits_{k=1}^{\infty} \sum \limits_{n=1}^{N} a_{nk}$
+   
+   $\sum \limits_{n, k} a_{nk} \ge \sum \limits_{k=1}^{K} $
+   $\sum \limits_{n=1}^{N} a_{nk} \to \sum \limits_{k=1}^{\infty} $
+   $\sum \limits_{n=1}^{N} a_{nk}$
+   
+   $\sum \limits_{n, k} a_{nk}  \ge \sum \limits_{n=1}^{N} $
+   $\sum \limits_{k = 1}^{\infty} a_{nk} \to  \sum \limits_{n=1}^{\infty} $
+   $\sum \limits_{k=1}^{\infty} a_{nk}$.
+   
+   Если $A = \sum \limits_{n, k} a_{nk} < +\infty \Rightarrow$
+   сумма конечного числа слагаемых $> A - \varepsilon$. 
+   Но тогда  $\sum \limits_{n=1}^{N} \sum \limits_{k=1}^{K} a_{nk} > A - \varepsilon$. 
+   Тогда при переходе к пределу 
+   $ \sum \limits_{n=1}^{\infty} $
+   $\sum \limits_{k=1}^{\infty} a_{nk} \ge  A - \varepsilon$. От эпсилона можно избавиться, получили знак в другую сторону. Если сумма не конечна, то вместо $A - \varepsilon$ берем $M$ сколь угодно большое.
+   \end{proof}
+   
+   \begin{theorem}
+       $\P$~--- полукольцо. 
+       $\mu : \P \to [0; +\infty]$~--- объем. Тогда следующие два утверждения равносильны:
+   
+       1. $\mu$~---мера
+   
+       2. Если $P \subset \bigcup \limits_{n - 1}^{\infty} P_n$, $P, P_1, \ldots P_n \in P$, 
+       то $\mu P \le \sum \limits_{n=1}^{\infty} \mu P_n$ (счетная полуаддитивность)
+   \end{theorem}
+   
+   \begin{proof}
+       $2 \to 1:$ была усиленная монотонность. Если $P = \bigsqcup \limits_{n = 1}^{\infty} P_n$, 
+       то в одну сторону получим усиленную монотонность, а в другую счетную полуаддитвиность.
+   
+       $1 \to 2:$ $P_n' := P \cap P_n \Rightarrow P = \bigcup \limits_{n = 1}^{\infty} P_n' \Rightarrow$
+       $\ \exists \ Q_{nk} \in \P$, т.ч. $P = \bigsqcup \limits_{n = 1}^{\infty}  \bigsqcup \limits_{k = 1}^{m_n} Q_{nk}$, 
+       при этом $Q_{nk} \subset P_n'$. \ $\bigsqcup \limits_{k = 1}^{m_n} Q_{nk} \subset P_n' \Rightarrow$ \graytext{/*По монотонности*/}
+       $\Rightarrow \sum \limits_{k=1}^{m_n} \mu Q_{nk} \le \mu P_n' \le \mu P_n$. \
+       $\mu P = \sum \limits_{n=1}^{\infty} \sum \limits_{k=1}^{m_k} \mu Q_{nk} \le $
+       $\sum \limits_{n=1}^{\infty} \mu P_n$
+   \end{proof}
+   
+   \begin{consequence}
+       Если $\mu$~--- мера, заданная на $\sigma$-алгебре, то счетное объединение множеств нулевой меры имеет нулевую меру.
+   \end{consequence}
+   
+   
+   \begin{theorem}
+       $\mu$~--- объем, заданный на $\sigma$-алгебре $\A$. Тогда следующие два утверждения равносильны:
+   
+       1. $\mu$~--- мера
+   
+       2. Если $A_k \subset A_{k + 1} \in \A \ \forall \ k$, то $\mu \left ( \bigcup \limits_{n = 1}^{\infty} A_n \right ) = $
+       $\lim \limits_{n \to \infty} \mu A_n$ (непрерывность снизу)
+   \end{theorem}
+   
+   \begin{proof}
+       $1 \to 2:$ $B_K := A_k \setminus A_{k - 1}$ ($A_0 := \varnothing$). \ 
+       $A := \bigcup \limits_{n = 1}^{\infty} A_n = \bigsqcup \limits_{n = 1}^{\infty} B_n \Rightarrow$ \graytext{/*так как $\mu$~--- мера*/}
+       $\Rightarrow \mu A = \sum \limits_{n=1}^{\infty} \mu B_n = \lim \limits_{n \to \infty} \sum \limits_{k=1}^{n} \mu B_k = $
+       $\lim \limits_{n \to \infty} \mu \left ( \bigsqcup \limits_{k = 1}^{n} B_k \right ) = \lim \mu A_n$.
+   
+       $2 \to 1:$ Пусть $A = \bigsqcup \limits_{n = 1}^{\infty} C_n$. Определим $A_n := \bigsqcup \limits_{k = 1}^{n} C_k$, 
+       при этом $A_n \subset A_{n + 1}$ и $A = \bigcup \limits_{n = 1}^{\infty} A_n$. 
+       Тогда по $2.$ имеем $\mu A = \lim \limits_{n \to \infty} A_n = \lim \limits_{n \to \infty} \mu (\bigsqcup \limits_{k = 1}^{n} C_k) = $
+       \graytext{/*так как $\mu$~--- объем*/}
+       $ = \lim \limits_{n \to \infty} \sum \limits_{k=1}^{n} \mu C_k = \sum \limits_{k=1}^{\infty} \mu C_k$.
+   \end{proof}
+   
+   \begin{theorem}
+       $\mu$~--- объем, заданный на $\sigma$-алгебре. При этом $\mu X < +\infty$. Тогда следующие три утверждения равносильны:
+   
+       1. $\mu$~---мера
+   
+       2. Если $A_k \supset A_{k + 1} \in \A$, то $\mu \left ( \bigcap \limits_{k = 1}^{\infty} A_k \right ) = $
+       $\lim \limits_{n \to \infty} \mu A_n$ (непрерывность сверху)
+   
+       3. Если $A_k \supset A_{k + 1} \in \A$ и $\bigcap \limits_{n = 1}^{\infty} A_n = \varnothing$, то
+       $\lim \limits_{n \to \infty} \mu A_n = 0$ (непрерывность сверху на пустом множестве)
+   \end{theorem}
+   
+   \begin{proof}
+       $2 \to 3$ очевидно
+   
+       $1 \to 2$ Пусть $B_n := X \setminus A_n$. Тогда $B_k \subset B_{k + 1} \Rightarrow$
+       $\mu X - \mu \left ( \bigcap \limits_{k = 1}^{\infty} A_n \right ) = $
+       $\mu \left ( X \setminus \bigcap \limits_{n = 1}^{\infty} A_n  \right ) = $
+       $\mu \left ( \bigcup \limits_{n = 1}^{\infty} B_n \right ) $
+       $= \lim \limits_{n \to \infty} \mu B_n = $
+       $\mu X - \lim \limits_{n \to \infty} \mu A_n$
+   
+       $3 \to 1$ $A = \bigsqcup \limits_{k = 1}^{\infty} C_k$, Тогда $A_n := \bigsqcup \limits_{k = n + 1}^{\infty} C_k$. \ 
+       $\bigcap \limits_{n = 1}^{\infty} A_n = \varnothing$. \ 
+       $A = \bigsqcup \limits_{k = 1}^{n} C_k \sqcup A_n \Rightarrow $
+       $\mu A = \sum \limits_{k=1}^{n} \mu C_k + \mu A_n$. При этом $\mu A_n \to 0$, так что 
+       $\mu A = \lim \limits_{n \to \infty} \sum \limits_{k=1}^{n} \mu C_k = $
+       $\sum \limits_{k=1}^{\infty} \mu C_k$
+   \end{proof}
+   
+   \begin{consequence}
+       Пусть $\mu$~--- мера в $\sigma$-алгебре. $A_{k + 1} \subset A_k \in \A \ \forall \ k$ и 
+       $\mu A_n < +\infty$ при некотором $n$. 
+       Тогда $\mu \left ( \bigcap \limits_{n = 1}^{\infty} A_n \right ) = \lim \limits_{n \to \infty} \mu A_n$
+   \end{consequence}
+   
+   \begin{observation}
+       Конечность меры существенна. Пример: $X = \R$, $A_k := [k; +\infty)$, $\bigcap \limits_{k = 1}^{\infty} A_k = \varnothing$, но
+       $\lambda A_k = +\infty$ (где $\lambda$~--- это длина)
+   \end{observation}
+
+
+\subsection{Продолжение меры}
+
+\begin{definition}
+    $\nu : 2^X \to [0; +\infty]$~--- субмера, если:
+
+    1. $\nu \varnothing = 0$
+
+    2. Если $A \subset B$, то $\nu A \le \nu B$ (монотонность)
+
+    3. $\nu \left ( \bigcup \limits_{n = 1}^{\infty} A_n \right ) \le \sum \limits_{n=1}^{\infty} \nu A_n$ (счетная полуаддитивность)
+\end{definition}
+
+\begin{definition}
+    $\mu$~--- полная мера, если из того, что $A \in \A$, $\mu A = 0$ и $B \subset A$, следует, что $B \in \A$ (и тогда $\mu B = 0$)
+\end{definition}
+
+\begin{definition}
+    Пусть $\nu$~--- субмера. Измеримым относительно $\nu$ назовем множество $E$ такое, что  $\ \forall \ A \subset X$ выполнено
+    $\nu A = \nu (A \cap E) + \nu (A \setminus E)$
+\end{definition}
+
+\begin{observation}
+    $\le $ следует из счетной полуаддитивности $\nu$.
+\end{observation}
+
+\begin{theorem} Каратеодори
+
+    $\nu$-измеримые множества образуют $\sigma$-алгебру и сужение $\nu$ на эту $\sigma$-алгебру~--- полная мера.
+\end{theorem}
+
+\begin{proof}
+    Пусть $\A$~--- все $\nu$-измеримые множества. Хотим доказать, что $\A$~--- $\sigma$-алгебра.
+
+    1. Докажем, что $\varnothing \in \A$. $\nu (A \cap \varnothing) + \nu (A \setminus \varnothing) = 0 + \nu A = \nu A$. 
+    Также надо показать. что если $\nu E = 0$, то $E \in \A$. $\nu (A \cap E) + \nu (A \setminus E) \le \nu E + \nu A = \nu A$.
+
+    2. Теперь докажем, что $\A$~--- симметричная. $A \cap (X \setminus E) = A \setminus E$. $A \setminus (X \setminus E) = A \cap E$.
+    При переходе к дополнению все меняется местами просто.
+
+    3. Докажем, что если $E, F \in \A$, то $E \cup F \in \A$. $\nu A = \nu (A \cap E) + \nu (A \setminus E) = $
+    $\nu (A \cap E) + \nu ((A \setminus E) \cap F) + \nu ((A \setminus E) \setminus F) = $
+    $\nu (A \cap E) + \nu ((A \setminus E) \cap F) + \nu (A \setminus (E \cup F))$. 
+    Заметим, что $(A \cap E) \cup ((A \setminus E) \cap F) = A \cap (E \cup F)$, так что можно продолжить неравенством:
+    $\ge \nu (A \setminus (E \cup F)) + \nu (A \cap (E \cup F))$.
+
+    Получили, что $\A$~--- алгебра. Осталось показать, что она является $\sigma$-алгеброй.
+
+    4. Пусть $E = \bigsqcup \limits_{n = 1}^{\infty} E_n$ и $E_n \in \A$. 
+    Подставим в формулу: $\nu A = \nu (A \cap (\bigsqcup \limits_{k = 1}^{n} E_k)) + $
+    $\nu (A \setminus \bigsqcup \limits_{k = 1}^{n} E_k) \ge $
+    $ \nu (A \cap (\bigsqcup \limits_{k = 1}^{n} E_k)) + $
+    $\nu (A \setminus \bigsqcup \limits_{k = 1}^{\infty} E_k) = $
+    $ \nu (A \cap (\bigsqcup \limits_{k = 1}^{n} E_k)) + \nu (A \setminus E)$.
+    Пусть $A \cap \bigsqcup \limits_{k = 1}^{n + 1} E_k = B$. 
+    Тогда $\nu B = \nu (B \cap E_{n + 1}) + \nu (B \setminus E_{n + 1}) = $
+    $\nu (A \cap E_{n + 1}) + \nu (A \cap \bigsqcup \limits_{k = 1}^{n} E_k)$.
+    Тогда можно продолжить наше равенство: $ \nu (A \cap (\bigsqcup \limits_{k = 1}^{n} E_k)) + \nu (A \setminus E) = $
+    $\sum \limits_{k=1}^{n} \nu (A \cap E_k) + \nu (A \setminus E)$. 
+    Перейдем к пределу:
+    $\nu A \ge \sum \limits_{k=1}^{\infty} \nu (A \cap E_k) + \nu (A \setminus E) \ge $
+    $\nu (A \cap E) + \nu (A \setminus E)$
+
+    5. $E = \bigcup \limits_{n = 1}^{\infty} E_n = \bigsqcup \limits_{n = 1}^{\infty} F_n$, где 
+    $F_n := E_n \setminus \bigcup \limits_{k = 1}^{n - 1} E_k$, при этом $F_n \in \A$.
+
+    Получили, что $\A$~---$\sigma$-алгебра.
+
+    6. Полнота есть по пункту $1.$
+
+    7. $\nu$~---объем, так как $\nu (E \sqcup F) = \nu ((E \sqcup F) \cap E) + \nu ((E \sqcup F) \setminus E) = \nu E + \nu F$. 
+    Объем + счетная аддитивность $\Rightarrow$ мера.
+\end{proof}
