@@ -151,7 +151,16 @@
 
 \newcommand{\follow}{\textbf{\textit{Следствие:}}}
 \newcommand{\notice}{\underline{\textit{Замечание:}}}
-\newcommand{\example}{\underline{Пример:}}
+\newtheorem*{consequence}{Следствие}
+\newtheorem*{properties}{Свойства}
+\newtheorem*{property}{Свойство}
+%\newtheorem*{proof}{Доказательство}
+
+\theoremstyle{definition}
+\newtheorem*{example}{Пример}
+\newtheorem*{observation}{Замечание}
+\newtheorem*{designation}{Обозначение}
+
 \newcommand{\examples}{\underline{Примеры:}}
 
 % algebra defs
@@ -373,6 +382,7 @@
 \newpage
 \begin{normalsize}
 \import{lectures/}{lecture01.tex}
+\import{lectures/}{lecture02.tex}
 $ $
 \end{normalsize}
 \end{document}
