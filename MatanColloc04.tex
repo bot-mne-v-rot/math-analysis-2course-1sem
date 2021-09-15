@@ -34,8 +34,10 @@
 \usepackage{wrapfig}
 \usepackage{graphicx}
 \usepackage{extarrows}
+\usepackage[breakable, theorems, skins]{tcolorbox}
 
-\usetikzlibrary{decorations.pathreplacing,
+\usetikzlibrary{patterns.meta,
+                decorations.pathreplacing,
                 positioning, 
                 quotes,
                 intersections,
@@ -260,6 +262,52 @@
 \newcommand\calloutup[3][1.5pt]{%
   \def\stacktype{L}\stackMath\stackunder[#1]{#2}{\callouttextup{#3}}%
 }
+\tikzset{
+    box1/.style={%
+        draw=black, thick,
+        rectangle,
+        minimum height=2.5cm,
+        minimum width=2.5cm
+    },
+    box2/.style={%
+        draw=black, thick,
+        rectangle,
+        minimum height=2cm,
+        minimum width=3cm
+    },
+    box3/.style={%
+        draw=black, dashed,
+        rectangle,
+        minimum height=2.5cm,
+        minimum width=2.5cm
+    },
+    box4/.style={%
+        draw=black, dashed,
+        rectangle,
+        minimum height=2.15cm,
+        minimum width=3.15cm
+    },
+}
+
+\DeclareRobustCommand{\mybox}[2][gray!20]{%
+\begin{tcolorbox}[   %% Adjust the following parameters at will.
+        breakable,
+        left=0pt,
+        right=0pt,
+        top=0pt,
+        bottom=0pt,
+        colback=#1,
+        colframe=#1,
+        width=\dimexpr\textwidth\relax, 
+        enlarge left by=0mm,
+        boxsep=5pt,
+        arc=0pt,outer arc=0pt,
+        ]
+        #2
+\end{tcolorbox}
+}
+%%
+
 \begin{document}
 
 \clearpage
